@@ -1,25 +1,0 @@
-
-ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÉÖæØüÿÿÿÿ8Òÿ˜Í¿,
-Ysquid:S1244"=Equality tests should not be made with floating point values.(‚ñŒ»8Òÿ˜Í¿,
-isquid:S00116"LRename this field "I" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ä³ì8Òÿ˜Í¿,
-hsquid:S00116"LRename this field "P" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Åõèb8Òÿ˜Í¿,
-^squid:S1244"=Equality tests should not be made with floating point values.(µı—şúÿÿÿÿ8Òÿ˜Í¿,
-gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(…²îà8Òÿ˜Í¿,
-^squid:S1244"=Equality tests should not be made with floating point values.(¥¬êëúÿÿÿÿ8Òÿ˜Í¿,
-ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÚÒË²øÿÿÿÿ8Òÿ˜Í¿,
-fsquid:S1226"EIntroduce a new variable instead of reusing the parameter "setpoint".(­‰â­üÿÿÿÿ8Òÿ˜Í¿,
-isquid:S00116"LRename this field "F" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(…¦ƒŞ8Òÿ˜Í¿,
-ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(·šƒ¬üÿÿÿÿ8Òÿ˜Í¿,
-Ysquid:S1244"=Equality tests should not be made with floating point values.(½Š ¤8Òÿ˜Í¿,
-^squid:S1244"=Equality tests should not be made with floating point values.(³£äÛøÿÿÿÿ8Òÿ˜Í¿,
-ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨Š¾»ûÿÿÿÿ8Òÿ˜Í¿,
-isquid:S00116"LRename this field "D" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ´ÆÓ8Òÿ˜Í¿,
-Ysquid:S1244"=Equality tests should not be made with floating point values.(Ï‡ßá8Òÿ˜Í¿,
-Ysquid:S1244"=Equality tests should not be made with floating point values.(ÜôÜ¢8Òÿ˜Í¿,
-Ysquid:S1244"=Equality tests should not be made with floating point values.(ÜôÜ¢8Òÿ˜Í¿,
-Ysquid:S1244"=Equality tests should not be made with floating point values.(Æ´Ø½8Òÿ˜Í¿,
-^squid:S1244"=Equality tests should not be made with floating point values.(êƒÎşùÿÿÿÿ8Òÿ˜Í¿,
-Ysquid:S1244"=Equality tests should not be made with floating point values.(‚ñŒ»8Òÿ˜Í¿,
-^squid:S1244"=Equality tests should not be made with floating point values.(½öÑüÿÿÿÿ8Òÿ˜Í¿,
-ssquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(—«œ²øÿÿÿÿ8Òÿ˜Í¿,
-^squid:S1244"=Equality tests should not be made with floating point values.(ëñùƒıÿÿÿÿ8Òÿ˜Í¿,
