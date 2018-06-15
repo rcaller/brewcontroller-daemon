@@ -1,0 +1,47 @@
+group 'brewcontroller'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.2.40'
+    ext.koin_version = '0.9.3'
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.23.1'
+    compile "org.koin:koin-core:$koin_version"
+    compile "khttp:khttp:0.1.0"
+    compile 'io.github.microutils:kotlin-logging:1.5.4'
+    compile 'org.slf4j:slf4j-simple:1.7.5'
+    compile "com.pi4j:pi4j-core:1.1"
+    compile "com.pi4j:pi4j-gpio-extension:1.1"
+    compile "com.pi4j:pi4j-device:1.1"
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile "org.jetbrains.kotlin:kotlin-test"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit"
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class' : 'uk.co.tertiarybrewery.brewcontroller.BrewControllerKt'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
