@@ -41,6 +41,7 @@ fun main(args: Array<String>) {
 
             targetTemp=targets.preWarm
             currentTemp = currentTemps.herms
+            log.info("Prewarming")
         }
         log.info("Target:"+targetTemp+"\nCurrent:"+currentTemp)
         val heatRatio = pid.calculate(targetTemp, currentTemp)
