@@ -61,11 +61,10 @@ task createDeb(type: Deb ) {
         into 'lib'
     }
 
-    into '/etc/init.d'
+
     from('src/main/resources/scripts') {
-        into ''
+        into '/etc/init.d'
     }
 
-    link('/etc/init.d/brewcontroller', '/usr/local/bin/brewcontroller-${project.version}.jar')
-
+    
 }
