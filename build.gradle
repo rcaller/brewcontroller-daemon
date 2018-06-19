@@ -1,5 +1,5 @@
 group 'brewcontroller'
-version '1.0-SNAPSHOT'
+version '0.1.0'
 
 buildscript {
     ext.kotlin_version = '1.2.40'
@@ -11,11 +11,14 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath("com.netflix.nebula:gradle-ospackage-plugin:4.4.0")
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'kotlin'
+apply plugin: 'nebula.deb'
+
 
 sourceCompatibility = 1.8
 
@@ -44,4 +47,25 @@ jar {
         attributes 'Main-Class' : 'uk.co.tertiarybrewery.brewcontroller.BrewControllerKt'
     }
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+
+task createDeb(type: Deb ) {
+    packageName = "brewcontroller"
+    version="${project.version}"
+    type=BINARY
+    requires('default-java')
+
+    into '/usr/local'
+    from(jar.outputs.files) {
+        into 'lib'
+    }
+
+    into '/etc/init.d'
+    from('src/main/resources/scripts') {
+        into ''
+    }
+
+    link('/etc/init.d/brewcontroller', '/usr/local/bin/brewcontroller-${project.version}.jar')
+
 }
