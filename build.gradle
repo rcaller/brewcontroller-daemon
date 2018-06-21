@@ -54,6 +54,7 @@ task createDeb(type: Deb ) {
     packageName = "brewcontroller"
     version="${project.version}"
     type=BINARY
+    arch="armhf"
     requires('default-java')
 
     into '/usr/local'
