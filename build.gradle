@@ -55,7 +55,7 @@ task createDeb(type: Deb ) {
     version="${project.version}"
     type=BINARY
     arch="armhf"
-    requires('default-java')
+    requires('default-jre-headless').or('java6-runtime-headless')
 
     into '/usr/local'
     from(jar.outputs.files) {
