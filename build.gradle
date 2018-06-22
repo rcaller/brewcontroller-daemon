@@ -64,7 +64,7 @@ task createDeb(type: Deb ) {
     into '/usr/local'
     from(jar.outputs.files) {
         rename { String fileName ->
-            fileName.replace("-0.1.${project.version}", "")
+            fileName.replace("-${project.version}", "")
         }
         fileMode 0500
         into 'lib'
