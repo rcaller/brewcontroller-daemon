@@ -1,10 +1,10 @@
 package uk.co.tertiarybrewery.brewcontroller.temperature
 
+import com.pi4j.component.temperature.TemperatureSensor
+import com.pi4j.io.w1.W1Master
+import uk.co.tertiarybrewery.brewcontroller.loadProperties
 import java.util.*
 import java.util.logging.Logger
-import com.pi4j.component.temperature.TemperatureSensor;
-import com.pi4j.io.w1.W1Master;
-import com.pi4j.temperature.TemperatureScale;
 
 interface ReaderInterface  {
     fun getTemperatures (): CurrentTemps
@@ -15,11 +15,10 @@ class Reader :ReaderInterface {
         private val log = Logger.getLogger("CONTROLLER")
     }
 
-    val properties = Properties()
+    var properties = Properties()
     var sensorMap = hashMapOf("not" to "loaded")
     init {
-        val propStream = Reader::class.java.getResourceAsStream("/application.properties")
-        properties.load(propStream)
+        properties= loadProperties()
         sensorMap=hashMapOf("herms" to properties.getProperty("sensor.herms"), "mash" to properties.getProperty("sensor.mash"), "flow" to properties.getProperty("sensor.flow"))
     }
     override fun getTemperatures(): CurrentTemps {
