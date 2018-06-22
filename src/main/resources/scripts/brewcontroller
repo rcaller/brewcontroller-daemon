@@ -1,7 +1,16 @@
 #!/bin/bash
-
+### BEGIN INIT INFO
+# Provides:          spring-boot-application
+# Required-Start:    $remote_fs $syslog $network
+# Required-Stop:     $remote_fs $syslog $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Spring Boot Application
+# Description:       Spring Boot Application
+# chkconfig:         2345 99 01
+### END INIT INFO
 BASE_DIR=/usr/local/lib
-START_COMMAND="java -jar $BASE_DIR/brewcontroller.jar"
+START_COMMAND="java -jar -Dpi4j.linking=dynamic $BASE_DIR/brewcontroller.jar"
 PID_FILE=$BASE_DIR/dropwizard-rest-stub.pid
 LOG_DIR=/var/log/
 

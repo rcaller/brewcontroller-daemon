@@ -57,15 +57,22 @@ task createDeb(type: Deb ) {
     arch="armhf"
     requires('default-jre-headless').or('java6-runtime-headless')
 
+    requires('wiringpi')
+
+    postInstall 'curl -s get.pi4j.com | sudo bash && update-rc.d brewcontroller defaults'
+    preUninstall 'update-rc.d brewcontroller remove'
     into '/usr/local'
     from(jar.outputs.files) {
+        rename { String fileName ->
+            fileName.replace("-${project.version}", "")
+        }
+        fileMode 0500
         into 'lib'
     }
 
 
     from('src/main/resources/scripts') {
+        fileMode 0755
         into '/etc/init.d'
     }
-
-    
 }
