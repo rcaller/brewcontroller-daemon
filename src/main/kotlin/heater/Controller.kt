@@ -22,10 +22,11 @@ class Controller : ControllerInterface {
     }
     override fun heat(onRatio: Double) {
         log.info("On for "+onRatio)
-        when (onRatio) {
+        roundedRatio = Math.round(onRatio * 100.0) / 100.0
+        when (roundedRatio) {
             1.0 -> heatPin.high()
             0.0 -> heatPin.low()
-            else -> heatPin.pulse((onRatio*10000).toLong())
+            else -> heatPin.pulse((roundedRatio*10000).toLong())
         }
 
     }
