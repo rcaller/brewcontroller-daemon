@@ -69,7 +69,7 @@ task createDeb(type: Deb ) {
         fileMode 0500
         into 'lib'
     }
-    from()('src/main/resources') {
+    from('src/main/resources') {
         rename { String fileName ->
             fileName.replace("application.properties}", "brewcontroller.conf")
         }
