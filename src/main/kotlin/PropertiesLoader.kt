@@ -9,7 +9,7 @@ fun loadProperties() : Properties {
     val properties = Properties()
     var file = File("/etc/brewcontroller.conf")
     if (file.exists()) {
-        val propStream = Resources.javaClass.getResourceAsStream("/etc/brewcontroller.conf")
+        val propStream = file.inputStream()
         properties.load(propStream)
     }
     else {

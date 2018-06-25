@@ -22,7 +22,7 @@ class Controller : ControllerInterface {
     }
     override fun heat(onRatio: Double) {
         log.info("On for "+onRatio)
-        roundedRatio = Math.round(onRatio * 100.0) / 100.0
+        val roundedRatio = Math.round(onRatio * 100.0) / 100.0
         when (roundedRatio) {
             1.0 -> heatPin.high()
             0.0 -> heatPin.low()
