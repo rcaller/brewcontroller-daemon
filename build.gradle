@@ -71,7 +71,7 @@ task createDeb(type: Deb ) {
     }
     from('src/main/resources') {
         rename { String fileName ->
-            fileName.replace("application.properties}", "brewcontroller.conf")
+            fileName.replace("application.properties", "brewcontroller.conf")
         }
         exclude("logging.properties")
         into '/etc'
