@@ -9,14 +9,16 @@ class PID {
         private val log = Logger.getLogger("CONTROLLER")
     }
     var properties = Properties()
-    var pid = MiniPID(0.0, 0.0, 0.0)
+    var pid = MiniPID(1.0, 0.0, 0.0)
     init {
 
         properties= loadProperties()
-        var proportional = properties.getProperty("PID.proportional").toDouble()
-        var integral = properties.getProperty("PID.integral").toDouble()
-        var differential =properties.getProperty("PID.differential").toDouble()
-        pid = MiniPID(proportional, integral, differential)
+        if (properties.getProperty("tune") != "true") {
+            var proportional = properties.getProperty("PID.proportional").toDouble()
+            var integral = properties.getProperty("PID.integral").toDouble()
+            var differential = properties.getProperty("PID.differential").toDouble()
+            pid = MiniPID(proportional, integral, differential)
+        }
         pid.setOutputLimits(0.0, 1.0)
         pid.setMaxIOutput(0.1)
     }
