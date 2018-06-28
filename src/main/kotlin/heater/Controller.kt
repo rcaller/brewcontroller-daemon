@@ -1,8 +1,6 @@
 package uk.co.tertiarybrewery.heater
 
-import com.pi4j.io.gpio.GpioFactory
-import com.pi4j.io.gpio.PinState
-import com.pi4j.io.gpio.RaspiPin
+import com.pi4j.io.gpio.*
 import java.util.logging.Logger
 
 interface ControllerInterface {
@@ -10,16 +8,21 @@ interface ControllerInterface {
 
 }
 
-class Controller : ControllerInterface {
+class Controller(val gpioPin: String) : ControllerInterface {
 
-    val gpio = GpioFactory.getInstance()
-    val heatPin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_28, "Heater", PinState.LOW)
-    init {
-        heatPin.setShutdownOptions(true, PinState.LOW)
-    }
     companion object {
         private val log = Logger.getLogger("CONTROLLER")
     }
+
+    val gpio : GpioController
+    val heatPin : GpioPinDigitalOutput
+    init {
+        gpio = GpioFactory.getInstance()
+        heatPin = gpio.provisionDigitalOutputPin(Pins.valueOf(gpioPin).pin, "Heater", PinState.LOW)
+        heatPin.setShutdownOptions(true, PinState.LOW)
+
+    }
+
     override fun heat(onRatio: Double) {
         log.info("On for "+onRatio)
         val roundedRatio = Math.round(onRatio * 100.0) / 100.0
@@ -30,4 +33,16 @@ class Controller : ControllerInterface {
         }
 
     }
+}
+
+enum class Pins (val pin: Pin) {
+    PIN_29(RaspiPin.GPIO_21),
+    PIN_31(RaspiPin.GPIO_22),
+    PIN_33(RaspiPin.GPIO_23),
+    PIN_35(RaspiPin.GPIO_24),
+    PIN_37(RaspiPin.GPIO_25),
+    PIN_32(RaspiPin.GPIO_26),
+    PIN_36(RaspiPin.GPIO_27),
+    PIN_38(RaspiPin.GPIO_28),
+    PIN_40(RaspiPin.GPIO_29)
 }

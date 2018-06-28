@@ -30,7 +30,7 @@ fun main(args: Array<String>) {
     val tempReader = Reader()
     val reporter = Reporter()
     val pid = PID()
-    val heatController = Controller()
+    val heatController = Controller(properties.getProperty("PIN.herms"))
     val kvTuner = KVTuner()
 
     if (properties.getProperty("tune") == "true") {
