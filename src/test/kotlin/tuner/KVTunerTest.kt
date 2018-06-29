@@ -41,4 +41,14 @@ internal class TagClientTest {
         val result = kvTuner.analyse()
         assertEquals(0.004687500000000001, result)
     }
+
+    @Test
+    fun testAnalysisWithDecliningSineData() {
+        var kvTuner=KVTuner()
+        for (i in 0..255) {
+            kvTuner.add(Math.pow(0.8, i.toDouble()) * sin(i*6.0))
+        }
+        val result = kvTuner.analyse()
+        assertEquals(0.0, result)
+    }
 }

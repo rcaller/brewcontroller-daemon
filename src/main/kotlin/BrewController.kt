@@ -9,6 +9,7 @@ import uk.co.tertiarybrewery.brewcontroller.temperature.Reader
 import uk.co.tertiarybrewery.brewcontroller.tuner.KVTuner
 
 import uk.co.tertiarybrewery.heater.Controller
+import java.util.*
 import java.util.logging.FileHandler
 import java.util.logging.Logger
 import java.util.logging.SimpleFormatter
@@ -36,7 +37,11 @@ fun main(args: Array<String>) {
     if (properties.getProperty("tune") == "true") {
 
         var targetTemp:Double = 30.0
-        var timer = fixedRateTimer(name="tuningScheduler", initialDelay=0, period=10000) {
+        var p = 0.1
+        var brewTimer:Timer = Timer()
+        kvTuner.clear()
+        pid.setP(p)
+        brewTimer = fixedRateTimer(name = "tuningScheduler", initialDelay = 0, period = 10000) {
             val currentTemps = tempReader.getTemperatures()
             val targets = reporter.report(currentTemps)
             var currentTemp = currentTemps.flow
@@ -44,7 +49,13 @@ fun main(args: Array<String>) {
             val heatRatio = pid.calculate(targetTemp, currentTemp)
             heatController.heat(heatRatio)
             if (kvTuner.ready()) {
-                kvTuner.analyse()
+                brewTimer.purge()
+                if (kvTuner.analyse() == 0.0) {
+
+                }
+                else {
+
+                }
             }
         }
     }

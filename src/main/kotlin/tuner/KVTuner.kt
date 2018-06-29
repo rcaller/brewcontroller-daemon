@@ -18,6 +18,13 @@ class KVTuner {
         val transformed: Array<Complex> = fft.transform(this.temps.toDoubleArray(), TransformType.FORWARD)
         val realTransformed = transformed.dropLast((this.temps.size/2))
 
+        // Is this actually an oscillation, ratio of top two frequencies
+        val topTwo = realTransformed.sortedByDescending { s -> s.abs() }.subList(0,2)
+        val ratio = topTwo[0].abs()/topTwo[1].abs()
+        if (ratio < 1.05 ) {
+            return 0.0;
+        }
+
         val maxFreq = realTransformed.maxBy { s -> s.abs() }
         val bucket =  transformed.indexOf(maxFreq)
         val frequency = 0.1 * bucket / this.temps.size
@@ -30,5 +37,9 @@ class KVTuner {
     }
     fun add(temp: Double) {
       temps.add(temp)
+    }
+
+    fun clear() {
+        temps = mutableListOf()
     }
 }

@@ -9,7 +9,7 @@ class PID {
         private val log = Logger.getLogger("CONTROLLER")
     }
     var properties = Properties()
-    var pid = MiniPID(1.0, 0.0, 0.0)
+    var pid = MiniPID(0.0, 0.0, 0.0)
     init {
 
         properties= loadProperties()
@@ -27,6 +27,10 @@ class PID {
         
         return result
 
+    }
+
+    fun setP(proportional: Double) {
+        pid.setP(proportional)
     }
 
 }
