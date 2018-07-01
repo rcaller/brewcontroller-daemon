@@ -42,6 +42,7 @@ fun main(args: Array<String>) {
         kvTuner.clear()
         pid.setP(p)
         brewTimer = fixedRateTimer(name = "tuningScheduler", initialDelay = 0, period = 10000) {
+            log.info("Tuning")
             val currentTemps = tempReader.getTemperatures()
             val targets = reporter.report(currentTemps)
             var currentTemp = currentTemps.flow
@@ -50,12 +51,15 @@ fun main(args: Array<String>) {
             heatController.heat(heatRatio)
             if (kvTuner.ready()) {
                 brewTimer.purge()
-                if (kvTuner.analyse() == 0.0) {
+                val freq = kvTuner.analyse()
+                if (freq == 0.0) {
 
                 }
                 else {
-
-                }
+                    log.info("p="+p)
+                    log.info("f="+f)
+                    throw(exception("END"))
+s                }
             }
         }
     }
