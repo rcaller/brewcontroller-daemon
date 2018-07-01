@@ -58,7 +58,7 @@ fun main(args: Array<String>) {
                 else {
                     log.info("p="+p)
                     log.info("f="+freq)
-                    throw(exception("END"))
+                    throw Exception("END")
                 }
             }
         }
