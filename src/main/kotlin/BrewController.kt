@@ -36,7 +36,7 @@ fun main(args: Array<String>) {
 
     if (properties.getProperty("tune") == "true") {
 
-        var targetTemp:Double = 30.0
+        var targetTemp:Double = 45.0
         var p = 0.1
         var brewTimer:Timer = Timer()
         kvTuner.clear()
