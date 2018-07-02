@@ -76,12 +76,13 @@ private fun tune( pid: PID, tempReader: Reader, reporter: Reporter, heatControll
         log.info("Tuning p="+p.toString())
         val currentTemps = tempReader.getTemperatures()
         val targets = reporter.report(currentTemps)
-        var currentTemp = currentTemps.flow
+        val currentTemp = currentTemps.flow
         kvTuner.add(currentTemp)
         val heatRatio = pid.calculate(targetTemp, currentTemp)
         heatController.heat(heatRatio)
         if (kvTuner.ready()) {
             brewTimer.purge()
+            brewTimer.cancel()
             val freq = kvTuner.analyse()
             if (freq == 0.0) {
                 kvTuner.clear()
