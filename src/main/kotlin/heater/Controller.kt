@@ -33,6 +33,10 @@ class Controller(val gpioPin: String) : ControllerInterface {
         }
 
     }
+
+    fun off() {
+        heatPin.low()
+    }
 }
 
 enum class Pins (val pin: Pin) {
