@@ -1,6 +1,8 @@
 package uk.co.tertiarybrewery.heater
 
 import com.pi4j.io.gpio.*
+import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent
+import com.pi4j.io.gpio.event.GpioPinListenerDigital
 import java.util.logging.Logger
 
 interface ControllerInterface {
@@ -20,6 +22,11 @@ class Controller(val gpioPin: String) : ControllerInterface {
         gpio = GpioFactory.getInstance()
         heatPin = gpio.provisionDigitalOutputPin(Pins.valueOf(gpioPin).pin, "Heater", PinState.LOW)
         heatPin.setShutdownOptions(true, PinState.LOW)
+        heatPin.addListener(GpioPinListenerDigital() {
+            fun handleGpioPinDigitalStateChangeEvent(event: GpioPinDigitalStateChangeEvent) {
+                log.warning("Heat State Change: "+event.getState())
+            }
+        })
 
     }
 
