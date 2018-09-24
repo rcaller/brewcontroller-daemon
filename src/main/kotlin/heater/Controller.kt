@@ -1,8 +1,7 @@
 package uk.co.tertiarybrewery.heater
 
 import com.pi4j.io.gpio.*
-import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent
-import com.pi4j.io.gpio.event.GpioPinListenerDigital
+import java.util.concurrent.Future
 import java.util.logging.Logger
 
 interface ControllerInterface {
@@ -18,25 +17,27 @@ class Controller(val gpioPin: String) : ControllerInterface {
 
     val gpio : GpioController
     val heatPin : GpioPinDigitalOutput
+    lateinit var pulseFuture: Future<*>
+
     init {
         gpio = GpioFactory.getInstance()
         heatPin = gpio.provisionDigitalOutputPin(Pins.valueOf(gpioPin).pin, "Heater", PinState.LOW)
         heatPin.setShutdownOptions(true, PinState.LOW)
-        heatPin.addListener(GpioPinListenerDigital() {
-            fun handleGpioPinDigitalStateChangeEvent(event: GpioPinDigitalStateChangeEvent) {
-                log.warning("Heat State Change: "+event.getState())
-            }
-        })
 
     }
+
+
 
     override fun heat(onRatio: Double) {
         log.info("On for "+onRatio)
         val roundedRatio = Math.round(onRatio * 100.0) / 100.0
+        if (this::pulseFuture.isInitialized) {
+            pulseFuture.cancel(true)
+        }
         when (roundedRatio) {
             1.0 -> heatPin.high()
             0.0 -> heatPin.low()
-            else -> heatPin.pulse((roundedRatio*10000).toLong())
+            else -> pulseFuture = heatPin.pulse((roundedRatio*10000).toLong())
         }
 
     }
