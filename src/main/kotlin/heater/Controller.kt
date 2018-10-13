@@ -37,7 +37,7 @@ class Controller(val gpioPin: String) : ControllerInterface {
         when (roundedRatio) {
             1.0 -> heatPin.high()
             0.0 -> heatPin.low()
-            else -> pulseFuture = heatPin.pulse((roundedRatio*10000).toLong(), true)
+            else -> heatPin.pulse((roundedRatio*10000).toLong(), true)
         }
 
     }
