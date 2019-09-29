@@ -17,9 +17,11 @@ class Reader :ReaderInterface {
 
     var properties = Properties()
     var sensorMap = hashMapOf("not" to "loaded")
+    var correctionMap = hashMapOf("not" to "loaded")
     init {
         properties= loadProperties()
         sensorMap=hashMapOf("herms" to properties.getProperty("sensor.herms"), "mash" to properties.getProperty("sensor.mash"), "flow" to properties.getProperty("sensor.flow"))
+        correctionMap=hashMapOf("herms" to properties.getProperty("correction.herms"), "mash" to properties.getProperty("correction.mash"), "flow" to properties.getProperty("correction.flow"))
     }
     override fun getTemperatures(): CurrentTemps {
         val w1Master = W1Master()
@@ -34,9 +36,9 @@ class Reader :ReaderInterface {
             val flowSensor = sensorMap.get("flow")
 
             when (deviceName) {
-                hermsSensor -> currentTemps.herms = device.getTemperature()
-                mashSensor -> currentTemps.mash = device.getTemperature()
-                flowSensor -> currentTemps.flow = device.getTemperature()
+                hermsSensor -> currentTemps.herms = device.getTemperature() + correctionMap.get("herms").toString().toFloat()
+                mashSensor -> currentTemps.mash = device.getTemperature() + correctionMap.get("mash").toString().toFloat()
+                flowSensor -> currentTemps.flow = device.getTemperature() + correctionMap.get("flow").toString().toFloat()
                 else -> log.warning("Unknows Sensor:"+deviceName+":")
             }
         }

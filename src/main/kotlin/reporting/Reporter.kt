@@ -1,6 +1,5 @@
 package uk.co.tertiarybrewery.brewcontroller.reporting
 
-import jdk.nashorn.internal.runtime.regexp.joni.Config.log
 import uk.co.tertiarybrewery.brewcontroller.temperature.CurrentTemps
 
 import khttp.post
