@@ -1,12 +1,10 @@
 package uk.co.tertiarybrewery.brewcontroller.reporting
 
-import uk.co.tertiarybrewery.brewcontroller.temperature.CurrentTemps
-
 import khttp.post
+import uk.co.tertiarybrewery.brewcontroller.temperature.CurrentTemps
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.util.logging.Logger
-import java.util.logging.FileHandler
 
 interface ReporterInterface {
 
@@ -28,7 +26,10 @@ class Reporter : ReporterInterface {
     var resp = TargetResponse(66.0,0.0)
     override fun report(currentTemps: CurrentTemps): TargetResponse {
 
-        val payload = mapOf("mash" to currentTemps.mash, "flow" to currentTemps.flow, "herms" to currentTemps.herms)
+        val payload = mapOf("mash" to currentTemps.mash,
+                                                "flow" to currentTemps.flow,
+                                                "herms" to currentTemps.herms,
+                                                "hlt" to currentTemps.hlt)
         try {
             val r = post(url="http://localhost:8080/in", json=payload)
 
