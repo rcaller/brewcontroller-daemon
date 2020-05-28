@@ -33,6 +33,7 @@ fun main(args: Array<String>) {
     val reporter = Reporter()
     val pid = PID()
     val heatController = Controller(properties.getProperty("PIN.herms"))
+    val hltController = Controller(properties.getProperty("PIN.hlt"));
 
 
     if (properties.getProperty("tune") == "true") {
@@ -46,6 +47,8 @@ fun main(args: Array<String>) {
             val targets = reporter.report(currentTemps)
             var targetTemp = targets.flow;
             var currentTemp = currentTemps.flow;
+            var hltTarget = targets.hlt;
+            var hltCurrent = currentTemps.hlt;
             if (targets.preWarm > 0) {
 
                 targetTemp = targets.preWarm
@@ -55,6 +58,8 @@ fun main(args: Array<String>) {
             log.info("Target:" + targetTemp + "\nCurrent:" + currentTemp)
             val heatRatio = pid.calculate(targetTemp, currentTemp)
             heatController.heat(heatRatio)
+            val hltRatio = pid.calculate(hltTarget, hltCurrent)
+            hltController.heat(hltRatio)
         }
 
     }

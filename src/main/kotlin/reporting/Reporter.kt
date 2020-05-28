@@ -23,7 +23,7 @@ class Reporter : ReporterInterface {
 
 
 
-    var resp = TargetResponse(66.0,0.0)
+    var resp = TargetResponse(66.0,0.0, 75.0)
     override fun report(currentTemps: CurrentTemps): TargetResponse {
 
         val payload = mapOf("mash" to currentTemps.mash,
@@ -35,7 +35,9 @@ class Reporter : ReporterInterface {
 
 
             if (r.statusCode == 200) {
-                resp = TargetResponse(r.jsonObject.getDouble("pre_warm"), r.jsonObject.getDouble("active"))
+                resp = TargetResponse(r.jsonObject.getDouble("pre_warm"),
+                        r.jsonObject.getDouble("active"),
+                        r.jsonObject.getDouble("hlt"))
             } else {
                 log.warning("Report response code " + r.statusCode)
             }
@@ -51,6 +53,6 @@ class Reporter : ReporterInterface {
     }
 }
 
-data class TargetResponse (var preWarm: Double, var flow : Double)
+data class TargetResponse (var preWarm: Double, var flow : Double, var hlt: Double)
 
 

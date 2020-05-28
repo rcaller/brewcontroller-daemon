@@ -37,7 +37,7 @@ class Controller(val gpioPin: String) : ControllerInterface {
         when (roundedRatio) {
             1.0 -> heatPin.high()
             0.0 -> heatPin.low()
-            else -> heatPin.pulse((roundedRatio*10000).toLong(), true)
+            else -> heatPin.pulse((roundedRatio*10000).toLong())
         }
 
     }
@@ -48,6 +48,7 @@ class Controller(val gpioPin: String) : ControllerInterface {
 }
 
 enum class Pins (val pin: Pin) {
+    PIN_23(RaspiPin.GPIO_11),
     PIN_29(RaspiPin.GPIO_21),
     PIN_31(RaspiPin.GPIO_22),
     PIN_33(RaspiPin.GPIO_23),
