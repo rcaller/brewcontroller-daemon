@@ -32,6 +32,7 @@ fun main(args: Array<String>) {
     val tempReader = Reader()
     val reporter = Reporter()
     val pid = PID()
+    var hltPid = PID()
     val heatController = Controller(properties.getProperty("PIN.herms"))
     val hltController = Controller(properties.getProperty("PIN.hlt"));
 
@@ -59,7 +60,7 @@ fun main(args: Array<String>) {
             val heatRatio = pid.calculate(targetTemp, currentTemp)
             heatController.heat(heatRatio)
             log.info("HLT - Target:" + hltTarget + "\nCurrent:" + hltCurrent)
-            val hltRatio = pid.calculate(hltTarget, hltCurrent)
+            val hltRatio = hltPid.calculate(hltTarget, hltCurrent)
             hltController.heat(hltRatio)
         }
 
