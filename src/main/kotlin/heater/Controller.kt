@@ -48,7 +48,7 @@ class Controller(val gpioPin: String) : ControllerInterface {
 }
 
 enum class Pins (val pin: Pin) {
-    PIN_23(RaspiPin.GPIO_11),
+    PIN_23(RaspiPin.GPIO_14),
     PIN_29(RaspiPin.GPIO_21),
     PIN_31(RaspiPin.GPIO_22),
     PIN_33(RaspiPin.GPIO_23),
