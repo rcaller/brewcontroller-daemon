@@ -4,7 +4,7 @@ import uk.co.tertiarybrewery.brewcontroller.loadProperties
 import java.util.*
 import java.util.logging.Logger
 
-class PID {
+class PID (name: String) {
     companion object {
         private val log = Logger.getLogger("CONTROLLER")
     }
@@ -14,9 +14,9 @@ class PID {
 
         properties= loadProperties()
         if (properties.getProperty("tune") != "true") {
-            var proportional = properties.getProperty("PID.proportional").toDouble()
-            var integral = properties.getProperty("PID.integral").toDouble()
-            var differential = properties.getProperty("PID.differential").toDouble()
+            var proportional = properties.getProperty("$name.PID.proportional").toDouble()
+            var integral = properties.getProperty("$name.PID.integral").toDouble()
+            var differential = properties.getProperty("$name.PID.differential").toDouble()
             pid = MiniPID(proportional, integral, differential)
         }
         pid.setOutputLimits(0.0, 1.0)

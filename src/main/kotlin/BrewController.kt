@@ -31,8 +31,8 @@ fun main(args: Array<String>) {
 
     val tempReader = Reader()
     val reporter = Reporter()
-    val pid = PID()
-    var hltPid = PID()
+    val pid = PID("HERMS")
+    var hltPid = PID("HLT")
     val heatController = Controller(properties.getProperty("PIN.herms"))
     val hltController = Controller(properties.getProperty("PIN.hlt"));
 
