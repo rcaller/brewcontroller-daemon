@@ -32,7 +32,7 @@ class Reader :ReaderInterface {
     override fun getTemperatures(): CurrentTemps {
         val w1Master = W1Master()
 
-        val currentTemps = CurrentTemps(66.0, 65.5, 67.2, 66.3)
+        val currentTemps = CurrentTemps(0.0, 0.0, 0.0, 0.0)
         for(device : TemperatureSensor in (w1Master.getDevices(TemperatureSensor::class.java))) {
 
             val deviceNameOriginal : String = device.getName()
@@ -51,10 +51,10 @@ class Reader :ReaderInterface {
             }
         }
 
+        log.warning("CT: " + currentTemps.toString())
 
 
-
-        return currentTemps;
+        return currentTemps
     }
 }
 
