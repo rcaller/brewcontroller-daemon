@@ -43,10 +43,10 @@ class Reader :ReaderInterface {
             val hltSensor = sensorMap.get("hlt")
             log.warning("GetTemp" + device.getTemperature())
             when (deviceName) {
-                hermsSensor -> currentTemps.herms = device.getTemperature() + correctionMap.get("herms").toString().toFloat()
-                mashSensor -> currentTemps.mash = device.getTemperature() + correctionMap.get("mash").toString().toFloat()
-                flowSensor -> currentTemps.flow = device.getTemperature() + correctionMap.get("flow").toString().toFloat()
-                hltSensor -> currentTemps.hlt = device.getTemperature() + correctionMap.get("hlt").toString().toFloat()
+                hermsSensor -> currentTemps.herms = getTemperature(device) + correctionMap.get("herms").toString().toFloat()
+                mashSensor -> currentTemps.mash = getTemperature(device) + correctionMap.get("mash").toString().toFloat()
+                flowSensor -> currentTemps.flow = getTemperature(device) + correctionMap.get("flow").toString().toFloat()
+                hltSensor -> currentTemps.hlt = getTemperature(device) + correctionMap.get("hlt").toString().toFloat()
                 else -> log.warning("Unknows Sensor:"+deviceName+":")
             }
         }
@@ -55,6 +55,11 @@ class Reader :ReaderInterface {
 
 
         return currentTemps
+    }
+
+    private fun getTemperature(device: TemperatureSensor): Double {
+        val temp = device.getTemperature()
+        return if (temp.isNaN())  0.0 else temp
     }
 }
 
