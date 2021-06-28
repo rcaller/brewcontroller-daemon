@@ -41,7 +41,7 @@ class Reader :ReaderInterface {
             val mashSensor =sensorMap.get("mash")
             val flowSensor = sensorMap.get("flow")
             val hltSensor = sensorMap.get("hlt")
-            log.warning("GetTemp" + device.getTemperature())
+
             when (deviceName) {
                 hermsSensor -> currentTemps.herms = getTemperature(device) + correctionMap.get("herms").toString().toFloat()
                 mashSensor -> currentTemps.mash = getTemperature(device) + correctionMap.get("mash").toString().toFloat()
@@ -50,9 +50,6 @@ class Reader :ReaderInterface {
                 else -> log.warning("Unknows Sensor:"+deviceName+":")
             }
         }
-
-        log.warning("CT: " + currentTemps.toString())
-
 
         return currentTemps
     }
