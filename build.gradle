@@ -60,7 +60,7 @@ task createDeb(type: Deb ) {
 
     requires('wiringpi')
 
-    postInstall 'curl -s get.pi4j.com | sudo bash && update-rc.d brewcontroller defaults'
+    postInstall 'curl -sSL https://pi4j.com/install | sudo bash && update-rc.d brewcontroller defaults'
     preUninstall 'update-rc.d brewcontroller remove'
     into '/usr/local'
     from(jar.outputs.files) {
