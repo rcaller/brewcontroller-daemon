@@ -2,8 +2,8 @@ group 'brewcontroller'
 version '0.1.'+(System.env.BUILD_NUMBER ?: 1)
 
 buildscript {
-    ext.kotlin_version = '1.2.40'
-    ext.koin_version = '0.9.3'
+    ext.kotlin_version = '1.6.10'
+    ext.koin_version = '3.1.5'
 
     repositories {
         mavenCentral()
@@ -16,7 +16,7 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'kotlin'
+//apply plugin: 'kotlin'
 apply plugin: 'nebula.deb'
 
 
@@ -29,18 +29,17 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.23.1'
-    compile "org.koin:koin-core:$koin_version"
+    compile 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0'
+    compile "io.insert-koin:koin-core:$koin_version"
     compile "khttp:khttp:0.1.0"
-    compile 'io.github.microutils:kotlin-logging:1.5.4'
-    compile 'org.slf4j:slf4j-simple:1.7.5'
-    compile "com.pi4j:pi4j-core:1.1"
-    compile "com.pi4j:pi4j-gpio-extension:1.1"
-    compile "com.pi4j:pi4j-device:1.1"
+    compile 'io.github.microutils:kotlin-logging:2.1.21'
+    compile 'org.slf4j:slf4j-simple:1.7.36'
+    compile 'com.pi4j:pi4j-core:2.1.1'
+    compile 'com.pi4j:pi4j-gpio-extension:1.3'
+    compile 'com.pi4j:pi4j-device:1.3'
     compile group: 'org.apache.commons', name: 'commons-math3', version: '3.0'
     testCompile group: 'junit', name: 'junit', version: '4.11'
-    testCompile "org.jetbrains.kotlin:kotlin-test"
-    testCompile "org.jetbrains.kotlin:kotlin-test-junit"
+
 }
 
 jar {
