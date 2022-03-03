@@ -1,5 +1,5 @@
 package uk.co.tertiarybrewery.heater
-import com.pi4j.io.gpio.GpioController
+
 import com.pi4j.io.gpio.*
 
 import java.util.concurrent.Future

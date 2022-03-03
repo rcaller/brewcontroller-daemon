@@ -4,6 +4,7 @@ import org.apache.commons.math3.complex.Complex
 import org.apache.commons.math3.transform.DftNormalization
 import org.apache.commons.math3.transform.FastFourierTransformer
 import org.apache.commons.math3.transform.TransformType
+import java.io.Serializable
 import java.util.logging.Logger
 
 class KVTuner {
@@ -25,8 +26,8 @@ class KVTuner {
             return 0.0;
         }
 
-        val maxFreq = realTransformed.maxBy { s -> s.abs() }
-        val bucket =  transformed.indexOf(maxFreq)
+        val maxFreq = realTransformed.maxOf { s -> s.abs() }
+        val bucket =  transformed.indexOf<Serializable>(maxFreq)
         val frequency = 0.1 * bucket / this.temps.size
         return frequency
 
