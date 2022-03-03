@@ -47,7 +47,8 @@ jar {
     manifest {
         attributes 'Main-Class' : 'uk.co.tertiarybrewery.brewcontroller.BrewControllerKt'
     }
-
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
 
