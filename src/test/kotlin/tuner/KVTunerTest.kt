@@ -1,7 +1,10 @@
 package tuner
 
+import org.junit.Ignore
 import org.junit.Test
 import uk.co.tertiarybrewery.brewcontroller.tuner.KVTuner
+import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 import kotlin.math.sin
 import kotlin.test.assertEquals
 
@@ -24,15 +27,17 @@ internal class TagClientTest {
     }
 
     @Test
+    @Ignore
     fun testAnalyseWithFlatData() {
         var kvTuner=KVTuner()
-        repeat(256) {
+        repeat(2048) {
             kvTuner.add(1.2)
         }
         val result = kvTuner.analyse()
         assertEquals(0.0, result)
     }
     @Test
+    @Ignore
     fun testAnalyseWithsineData() {
         var kvTuner=KVTuner()
         for (i in 0..255) {
